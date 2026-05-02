@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>Glass</artifactId>
+    <artifactId>Glasses</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
@@ -26,7 +26,7 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <version>2.0.1</version>
+            <version>5.0.1</version>
         </dependency>
 
         <dependency>
@@ -38,6 +38,7 @@
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>6.0.0</version>
+
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -56,16 +57,20 @@
                 <version>3.4.0</version>
             </plugin>
             <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>11.0.15</version>
                 <configuration>
-                    <!-- Укажите порт, на котором запустится сайт. По умолчанию 8080 -->
-                    <port>8080</port>
-                    <!-- Укажите путь для доступа к сайту. "/" означает localhost:8080/ -->
-                    <path>/</path>
+                    <httpConnector>
+                        <port>8080</port>
+                    </httpConnector>
+                    <webApp>
+                        <contextPath>/Glasses-shop</contextPath>
+                    </webApp>
+
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
