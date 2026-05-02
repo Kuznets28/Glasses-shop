@@ -9,7 +9,7 @@ public class DatabasePool {
     private static HikariDataSource dataSours;
     static {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:postgresql://localhost:5432/Glasses");
+        config.setJdbcUrl("jdbc:postgresql://localhost:5432/glasses");
         config.setPassword("1234321");
         config.setUsername("postgres");
         config.setMaximumPoolSize(10);

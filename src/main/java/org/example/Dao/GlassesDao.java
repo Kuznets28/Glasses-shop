@@ -24,13 +24,14 @@ public class GlassesDao {
                         res.getString("sku"),
                         res.getString("name"),
                         res.getInt("price"),
-                        res.getString("path")
+                        res.getString("pathToPhoto")
                 );
                 array.add(glasses);
             }
             return array;
         }
         catch (SQLException e){
+            System.out.println("какаета хуня");
             return new ArrayList<>();
         }
     }
@@ -39,7 +40,7 @@ public class GlassesDao {
         String sql = "insert into glasses(sku, name, price, path) values(?, ?, ?, ?)";
         try (Connection connect = DatabasePool.getConnection();
             PreparedStatement pst = connect.prepareStatement(sql)){
-            pst.executeQuery();
+            pst.executeUpdate();
         }
         catch (SQLException e){
 
