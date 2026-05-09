@@ -47,11 +47,11 @@ public class Glasses {
         this.sku = sku;
     }
 
-    public String getName_model() {
+    public String getNameModel() {
         return name_model;
     }
 
-    public void setName_model(String name_model) {
+    public void setNameModel(String name_model) {
         this.name_model = name_model;
     }
 

@@ -12,7 +12,7 @@
         <div class="container">
             <h1>👓 Магазин очков</h1>
             <nav>
-                <a href="${pageContext.request.contextPath}/">Главная</a>
+                <a href="${pageContext.request.contextPath}/home">Главная</a>
                 <a href="${pageContext.request.contextPath}/catalog">Каталог</a>
                 <a href="${pageContext.request.contextPath}/cart">Корзина</a>
             </nav>

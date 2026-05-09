@@ -6,6 +6,8 @@ import org.example.Dto.UserSession;
 import org.example.Dto.UserVerification;
 import org.example.model.Role;
 import org.example.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,14 +15,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class UserDao {
 
+public class UserDao {
+    public static final Logger logger = LoggerFactory.getLogger(UserDao.class);
     public UserDao(){
 
     }
 
 
     public ArrayList<UserSession> getAllUsers() throws SQLException {
+        logger.debug("Получение всех пользователь");
         String sql = "SELECT id, name, email, role, phone from users";
         try(Connection connection = DatabasePool.getConnection();
         PreparedStatement pst = connection.prepareStatement(sql);
@@ -36,14 +40,9 @@ public class UserDao {
                 );
                 array.add(user);
             }
+            logger.info("Получили пользоваелей");
             return array;
         }
-        catch(SQLException e){
-            e.printStackTrace();
-            throw e;
-        }
-
-
     }
 
     public UserSession createUser(UserRegisterDto user) throws SQLException {
@@ -66,13 +65,9 @@ public class UserDao {
                     );
                 } else {
                     //ошибка при запросе и возврате id
-                    throw new SQLException("Failed to create user - no ID returned");
+                    throw new SQLException("НЕ вернулся id созданого пользователя");
                 }
             }
-        } catch (SQLException e) {
-            //Ошибка при подключении
-            e.printStackTrace();
-            throw e;  // Пробрасываем дальше
         }
     }
 

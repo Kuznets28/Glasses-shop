@@ -1,6 +1,5 @@
 package org.example.servlet;
 
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,21 +9,29 @@ import org.example.Dao.GlassesDao;
 import org.example.model.Glasses;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/home")
-public class IndexServlet extends HttpServlet {
+@WebServlet("/catalog")
+public class CatalogServlet extends HttpServlet {
     private GlassesDao glassesDao;
     @Override
     public void init(){
-         glassesDao = new GlassesDao();
+        glassesDao = new GlassesDao();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Glasses> glassesList = glassesDao.getGlassesForHome();
-        request.setAttribute("AllGlasses", glassesList);
-        request.getRequestDispatcher("/views/index.jsp").forward(request, response);
+        String search = request.getParameter("search");
+        List<Glasses> glassesList;
+        if(search == null || search.trim().isEmpty()){
+            glassesList = glassesDao.getAllGlasses();
+        }
+        else {
+            glassesList = glassesDao.searchGlasses(search);
+        }
+
+        request.setAttribute("glassesList" , glassesList);
+        request.getRequestDispatcher("/views/catalog.jsp").forward(request, response);
+
     }
 }
