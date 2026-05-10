@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, org.example.model.Glasses, org.example.Dto.UserSession" %>
+<%@ page import="org.example.Dto.UserSession" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Магазин очков</title>
+    <title>Профиль Пользователя</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
@@ -30,31 +30,6 @@
             </nav>
         </div>
     </header>
-
-    <main class="container">
-        <div class="hero">
-            <h2>Стильные очки для любого случая</h2>
-            <p>Высокое качество и доступные цены</p>
-
-        </div>
-
-        <h2>Популярные модели</h2>
-        <div class="glasses-grid">
-            <%
-                List<Glasses> popularGlasses = (List<Glasses>) request.getAttribute("AllGlasses");
-                if (popularGlasses != null) {
-                    for (Glasses glasses : popularGlasses) {
-            %>
-            <div class="glass-card">
-            <img class="glass-image" src="<%= glasses.getPathToPhoto() %>" alt="<%= glasses.getNameModel() %>"
-                                 onerror="this.src='https://via.placeholder.com/200'">
-               <h3><%= glasses.getNameModel() %></h3>
-                <p class="price"><%= glasses.getPrice() %> ₽</p>
-            </div>
-            <%      }
-                }
-            %>
-        </div>
-    </main>
-</body>
-</html>
+    <h2>Учётные данные</h2>
+    <p>email:</p> <p><%=((UserSession) request.getSession().getAttribute("UserSession")).getEmail()%></p>
+</Body>

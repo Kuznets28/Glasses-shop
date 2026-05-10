@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Каталог очков</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
     <header>

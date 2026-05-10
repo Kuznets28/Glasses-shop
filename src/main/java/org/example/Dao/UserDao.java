@@ -24,7 +24,7 @@ public class UserDao {
 
 
     public ArrayList<UserSession> getAllUsers() throws SQLException {
-        logger.debug("Получение всех пользователь");
+        logger.debug("Получение всех пользователь из бд");
         String sql = "SELECT id, name, email, role, phone from users";
         try(Connection connection = DatabasePool.getConnection();
         PreparedStatement pst = connection.prepareStatement(sql);
@@ -40,7 +40,10 @@ public class UserDao {
                 );
                 array.add(user);
             }
-            logger.info("Получили пользоваелей");
+            if (array.isEmpty()){
+                logger.warn("При попытке получения всех пользователей нет не одного пользователя");
+                throw new SQLException();
+            }
             return array;
         }
     }
@@ -49,7 +52,6 @@ public class UserDao {
         String sql = "insert into users (name, password, email, phone) values (?, ?, ?, ?) returning id";
         try (Connection connect = DatabasePool.getConnection();
              PreparedStatement pst = connect.prepareStatement(sql)) {
-
             pst.setString(1, user.getName());
             pst.setString(2, user.getPassword());
             pst.setString(3, user.getEmail());
@@ -64,14 +66,15 @@ public class UserDao {
                             user.getPhone()
                     );
                 } else {
-                    //ошибка при запросе и возврате id
+                    logger.warn("При создании пользователя {} не вернулся id", user.getEmail());
                     throw new SQLException("НЕ вернулся id созданого пользователя");
                 }
             }
         }
     }
 
-    public UserSession userVerification(UserVerification user){
+    public UserSession userVerification(UserVerification user) throws SQLException{
+        logger.debug("Попытка входа в аккаунт {}", user.getEmail());
         String sql = "select id, name, role, phone from users where email = ? and password = ?";
         try (Connection connection = DatabasePool.getConnection();
         PreparedStatement pst = connection.prepareStatement(sql)){
@@ -87,14 +90,12 @@ public class UserDao {
                             result.getString("phone")
                     );
                 }
+                else {
+                    logger.info("Неудачная поппытка входа в аккаунт {}", user.getEmail());
+                    return null;
+                }
             }
-
         }
-        catch(SQLException e){
-            e.printStackTrace();
-        }
-        //Надо обработать в сервлете (Пользователя нет)
-        return null;
     }
 
 }

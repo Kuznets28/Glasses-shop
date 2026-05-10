@@ -33,11 +33,11 @@ public class GlassesDao {
                 );
                 array.add(glasses);
             }
-            logger.info("Получение всех очьков");
+            logger.info("Получение всех очков");
             return array;
         }
         catch (SQLException e){
-            logger.error("SQL ОШИБКА: при получении всех очьков:", e);
+            logger.error("SQL ОШИБКА: при получении всех очков:", e);
             return new ArrayList<>();
         }
     }
@@ -58,11 +58,11 @@ public class GlassesDao {
                 );
                 array.add(glasses);
             }
-            logger.info("Получение 10 первых очьков для главной страници");
+            logger.info("Получение 10 первых очков для главной страници");
             return array;
         }
         catch (SQLException e){
-            logger.error("SQL ОШИБКА: при получении 10 очьков:", e);
+            logger.error("SQL ОШИБКА: при получении 10 очков:", e);
             return new ArrayList<>();
         }
     }
@@ -78,14 +78,14 @@ public class GlassesDao {
             int row = pst.executeUpdate();
 
             if (row > 0){
-                logger.info("Добавлеы очьки с названием {}",  glasses.getNameModel());
+                logger.info("Добавлеы очки с названием {}",  glasses.getNameModel());
             }
             else {
-                logger.warn("Не получилось добавить очьки {}", glasses.getNameModel());
+                logger.warn("Не получилось добавить очки {}", glasses.getNameModel());
             }
         }
         catch (SQLException e){
-            logger.error("SQL ОШИБКА: при добавлении очьков с названием {}", glasses.getNameModel(), e);
+            logger.error("SQL ОШИБКА: при добавлении очков с названием {}", glasses.getNameModel(), e);
         }
     }
 
