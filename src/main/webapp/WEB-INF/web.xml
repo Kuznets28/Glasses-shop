@@ -6,5 +6,10 @@
          version="4.0">
 
     <display-name>Glasses Shop</display-name>
-
+    <listener>
+        <listener-class>org.example.servlet.SessionListener</listener-class>
+    </listener>
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
 </web-app>
