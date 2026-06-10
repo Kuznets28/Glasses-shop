@@ -39,6 +39,7 @@ public class LoginServlet extends HttpServlet {
            logger.info("Неудачная попаытка входа в аккаунт {}", email);
            request.setAttribute("error", "Неверная почта или пароль");
             request.getRequestDispatcher("/views/login.jsp").forward(request,response);
+           return;
        }
 
         try {

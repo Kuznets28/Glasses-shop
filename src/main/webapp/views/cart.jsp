@@ -91,11 +91,5 @@
             </div>
         <% } %>
     </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Магазин очков. Все права защищены.</p>
-        </div>
-    </footer>
 </body>
 </html>

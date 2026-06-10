@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class GlassesDao {
     private static final Logger logger = LoggerFactory.getLogger(GlassesDao.class);
 
@@ -25,10 +24,12 @@ public class GlassesDao {
             ArrayList<Glasses> array = new ArrayList<>();
             while(res.next()){
                 Glasses glasses = new Glasses(
-                        res.getLong("id"),
-                        res.getString("sku"),
-                        res.getString("name"),
+                        res.getInt("id"),
+                        res.getString("article"),
+                        res.getString("name_model"),
                         res.getInt("price"),
+                        res.getString("description"),
+                        res.getInt("count_glasses"),
                         res.getString("pathToPhoto")
                 );
                 array.add(glasses);
@@ -50,10 +51,12 @@ public class GlassesDao {
             ArrayList<Glasses> array = new ArrayList<>();
             while(res.next()){
                 Glasses glasses = new Glasses(
-                        res.getLong("id"),
-                        res.getString("sku"),
-                        res.getString("name"),
+                        res.getInt("id"),
+                        res.getString("article"),
+                        res.getString("name_model"),
                         res.getInt("price"),
+                        res.getString("description"),
+                        res.getInt("count_glasses"),
                         res.getString("pathToPhoto")
                 );
                 array.add(glasses);
@@ -68,13 +71,15 @@ public class GlassesDao {
     }
 
     public void addGlasses(Glasses glasses){
-        String sql = "insert into glasses(sku, name, price, path) values(?, ?, ?, ?)";
+        String sql = "insert into glasses(article, name_model, price, description, count_glasses, path_to_photo) values(?, ?, ?, ?, ?, ?) returning id";
         try (Connection connect = DatabasePool.getConnection();
             PreparedStatement pst = connect.prepareStatement(sql)){
-            pst.setString(1, glasses.getSku());
+            pst.setString(1, glasses.getArticle());
             pst.setString(2, glasses.getNameModel());
             pst.setInt(3, glasses.getPrice());
-            pst.setString(4, glasses.getPathToPhoto());
+            pst.setString(4, glasses.getDescription());
+            pst.setInt(5, glasses.getCountGlasses());
+            pst.setString(6, glasses.getPathToPhoto());
             int row = pst.executeUpdate();
 
             if (row > 0){
@@ -99,10 +104,12 @@ public class GlassesDao {
             try(ResultSet res = pst.executeQuery()){
                 while (res.next()){
                 list.add( new Glasses(
-                        res.getLong("id"),
-                        res.getString("sku"),
-                        res.getString("name"),
+                        res.getInt("id"),
+                        res.getString("article"),
+                        res.getString("name_model"),
                         res.getInt("price"),
+                        res.getString("description"),
+                        res.getInt("count_glasses"),
                         res.getString("pathToPhoto")
                 ));}
                 logger.info("Получение кталога при происке {} кол-во записей {}", search, list.size());

@@ -32,7 +32,7 @@ public class UserDao {
             ArrayList<UserSession> array = new ArrayList<>();
             while(rs.next()){
                 UserSession user = new UserSession(
-                        rs.getLong("id"),
+                        rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("email"),
                         Role.valueOf(rs.getString("role")),
@@ -59,7 +59,7 @@ public class UserDao {
             try (ResultSet resultSet = pst.executeQuery()) {
                 if (resultSet.next()) {
                     return new UserSession(
-                            resultSet.getLong("id"),
+                            resultSet.getInt("id"),
                             user.getName(),
                             user.getEmail(),
                             Role.USER,
@@ -83,7 +83,7 @@ public class UserDao {
             try(ResultSet result = pst.executeQuery()){
                 if (result.next()){
                     return new UserSession(
-                            result.getLong("id"),
+                            result.getInt("id"),
                             result.getString("name"),
                             user.getEmail(),
                             Role.valueOf(result.getString("role")),

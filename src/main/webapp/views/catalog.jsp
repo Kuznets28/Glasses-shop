@@ -22,7 +22,7 @@
                     UserSession userSession = (UserSession) request.getSession().getAttribute("UserSession");
                     if (userSession != null){
                 %>
-                <a href="${pageContext.request.contextPath}/login"><%= userSession.getName()%></a>
+                <a href="${pageContext.request.contextPath}/userProfile"><%= userSession.getName()%></a>
                 <%}
                 else{%>
                 <a href="${pageContext.request.contextPath}/login">Вход</a>

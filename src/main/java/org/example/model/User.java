@@ -6,6 +6,7 @@ public class User {
     private String password;
     private String email;
     private String phone;
+    private String address;
     private Role role;
 
     public User(int id, String name, String password, String email, String phone, Role role) {

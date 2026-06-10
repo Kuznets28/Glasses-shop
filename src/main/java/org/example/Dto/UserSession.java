@@ -3,13 +3,13 @@ package org.example.Dto;
 import org.example.model.Role;
 
 public class UserSession {
-    private Long id;
+    private int id;
     private String name;
     private String email;
     private Role role;
     private String phone;
 
-    public UserSession(Long id, String name, String email, Role role, String phone) {
+    public UserSession(int id, String name, String email, Role role, String phone) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -17,11 +17,11 @@ public class UserSession {
         this.phone = phone;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

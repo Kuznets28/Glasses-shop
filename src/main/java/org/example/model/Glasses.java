@@ -1,23 +1,38 @@
 package org.example.model;
 
+import java.util.Objects;
+
 public class Glasses {
-    private long id;
-    private String sku;
-    private String name_model;
+    private int id;
+    private String article;
+    private String nameModel;
     private int price;
+    private String description;
+    private int countGlasses;
     private String pathToPhoto;
 
-    public Glasses(long id, String sku, String name_model, int price, String pathToPhoto) {
+    public Glasses(int id, String article, String name_model, int price, String description, int count_glasses, String pathToPhoto) {
         this.id = id;
-        this.sku = sku;
-        this.name_model = name_model;
+        this.article = article;
+        this.nameModel = name_model;
         this.price = price;
+        this.description = description;
+        this.countGlasses = count_glasses;
         this.pathToPhoto = pathToPhoto;
     }
 
-    public Glasses (String sku, String model, int price, String pathToPhoto){
-        this.sku= sku;
-        name_model = model;
+    public Glasses(int id, String article, String name_model, int price, String description, String pathToPhoto) {
+        this.id = id;
+        this.article = article;
+        this.nameModel = name_model;
+        this.price = price;
+        this.description = description;
+        this.pathToPhoto = pathToPhoto;
+    }
+
+    public Glasses (String article, String name_model, int price, String pathToPhoto){
+        this.article = article;
+        this.nameModel = name_model;
         this.price = price;
         this.pathToPhoto = pathToPhoto;
 
@@ -31,7 +46,7 @@ public class Glasses {
         this.pathToPhoto = patToPhoto;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -39,20 +54,45 @@ public class Glasses {
         this.id = id;
     }
 
-    public String getSku() {
-        return sku;
+    public String getArticle() {
+        return article;
     }
 
-    public void setSku(String sku) {
-        this.sku = sku;
+    public Glasses setArticle(String article) {
+        this.article = article;
+        return this;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Glasses setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public int getCountGlasses() {
+        return countGlasses;
+    }
+
+    public Glasses setCountGlasses(int countGlasses) {
+        this.countGlasses = countGlasses;
+        return this;
+    }
+
+    public Glasses setPathToPhoto(String pathToPhoto) {
+        this.pathToPhoto = pathToPhoto;
+        return this;
     }
 
     public String getNameModel() {
-        return name_model;
+        return nameModel;
     }
 
     public void setNameModel(String name_model) {
-        this.name_model = name_model;
+        this.nameModel = name_model;
     }
 
     public int getPrice() {
@@ -61,5 +101,18 @@ public class Glasses {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Glasses glasses = (Glasses) o;
+        return Objects.equals(id, glasses.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
